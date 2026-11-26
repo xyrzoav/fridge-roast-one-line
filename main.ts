@@ -9,9 +9,10 @@ import { join } from 'node:path';
 const ROAST =
   "My smart fridge emailed me that the milk expired. It cc'd the milk.";
 
-// The gate requires 1 to 199 characters; fail loudly instead of writing an invalid entry.
-if (ROAST.length < 1 || ROAST.length > 199) {
-  throw new Error(`entry is ${ROAST.length} chars, must be 1-199`);
+// The gate allows 1 to 200 characters; this line is 67. Fail loudly instead of
+// writing an invalid entry, so a bad edit can never slip through silently.
+if (ROAST.length < 1 || ROAST.length > 200) {
+  throw new Error(`entry is ${ROAST.length} chars, must be 1-200`);
 }
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
